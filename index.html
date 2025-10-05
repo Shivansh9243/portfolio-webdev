@@ -1,0 +1,655 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shivansh Pratap Singh | Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --neon-purple: #b967ff;
+            --neon-pink: #b967ff;
+            --neon-orange: #ff6700;
+            --neon-yellow: #ffd60a;
+            --dark: #0a0a0f;
+            --darker: #050508;
+        }
+        body {
+            font-family: 'Courier New', monospace;
+            background: var(--dark);
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        
+        .city-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background-image: url(man-in-purple.png);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .city-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom,
+                rgba(10, 10, 15, 0.6) 0%,
+                rgba(26, 10, 31, 0.7) 50%,
+                rgba(15, 10, 26, 0.85) 100%);
+        }
+
+        
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 10, 15, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 217, 255, 0.3);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--neon-purple);
+            text-shadow:
+                0 0 10px var(--neon-purple),
+                0 0 20px var(--neon-purple),
+                0 0 30px var(--neon-purple);
+            letter-spacing: 3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            position: relative;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-purple);
+            text-shadow: 0 0 10px var(--neon-purple);
+        }
+
+        
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 3rem;
+            position: relative;
+        }
+
+        .neon-name {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            color: #361f46;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            text-shadow:
+                0 0 10px #56416d,
+                0 0 15px #604176,
+                0 0 20px #684b7e,
+                0 0 20px #5c3f71,
+                0 0 70px #5e4271;
+            -webkit-text-stroke: 2px #b967ff;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--neon-pink);
+            margin-bottom: 3rem;
+            text-shadow:
+                0 0 10px var(--neon-pink),
+                0 0 20px var(--neon-pink);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: transparent;
+            border: 2px solid var(--neon-purple);
+            color: var(--neon-purple);
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+            box-shadow:
+                0 0 10px var(--neon-purple),
+                inset 0 0 10px rgba(0, 217, 255, 0.1);
+        }
+
+        .cta-btn:hover {
+            color: var(--dark);
+            background: var(--neon-purple);
+            box-shadow:
+                0 0 20px var(--neon-purple),
+                0 0 40px var(--neon-purple),
+                inset 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        
+        section {
+            padding: 100px 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            color: var(--neon-purple);
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow:
+                0 0 10px var(--neon-purple),
+                0 0 20px var(--neon-purple),
+                0 0 40px var(--neon-purple);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .terminal-box {
+            background: rgba(10, 10, 15, 0.8);
+            border: 1px solid var(--neon-purple);
+            padding: 2.5rem;
+            position: relative;
+            box-shadow:
+                0 0 20px rgba(0, 217, 255, 0.2),
+                inset 0 0 20px rgba(0, 217, 255, 0.05);
+        }
+
+        .terminal-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-purple), transparent);
+            animation: scanline 6s linear infinite;
+            box-shadow: 0 0 10px var(--neon-purple);
+        }
+
+        @keyframes scanline {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(400px);
+            }
+        }
+
+        .terminal-box p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            color: #b0b0b0;
+            font-size: 0.95rem;
+            opacity: 0;
+            transform: translateY(-10px);
+            animation: revealText 6s ease-out infinite;
+        }
+
+        .terminal-box p:nth-child(1) { animation-delay: 0s; }
+        .terminal-box p:nth-child(2) { animation-delay: 1s; }
+        .terminal-box p:nth-child(3) { animation-delay: 2s; }
+        .terminal-box p:nth-child(4) { animation-delay: 3s; }
+        .terminal-box p:nth-child(5) { animation-delay: 4s; }
+        .terminal-box p:nth-child(6) { animation-delay: 5s; }
+
+        @keyframes revealText {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            2% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stats-box {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: rgba(10, 10, 15, 0.8);
+            padding: 2rem;
+            border: 1px solid var(--neon-pink);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            color: var(--neon-purple);
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--neon-purple);
+            position: relative;
+            z-index: 1;
+            padding-bottom: 19px;
+        }
+
+        .stat-label {
+            color: #888;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+    
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-box {
+            background: rgba(10, 10, 15, 0.8);
+            padding: 2.5rem;
+            border: 1px solid #b967ff;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .skill-box:hover {
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 30px #b967ff;
+            transform: translateY(-10px);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px var(--neon-purple));
+        }
+
+        .skill-box h3 {
+            color: var(--neon-purple);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .skill-box p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+     
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: rgba(10, 10, 15, 0.9);
+            border: 1px solid rgba(10, 10, 15, 0.9);
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s;
+        }
+
+        .project-card:hover {
+            border-color: var(--neon-purple);
+            transform: translateY(-10px);
+            box-shadow:
+                0 0 40px rgba(10, 10, 15, 0.9),
+                0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-header {
+            background: linear-gradient(95deg, #462563, rgba(0, 0, 0, 0.5));
+            padding: 4rem 2rem;
+            text-align: center;
+            font-size: 4rem;
+            position: relative;
+        }
+
+        .project-body {
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-body h3 {
+            color: var(--neon-purple);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px var(--neon-purple);
+        }
+
+        .project-body p {
+            color: #b0b0b0;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .project-link {
+            color: var(--neon-pink);
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 0.5rem;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        .project-link:hover {
+            color: var(--neon-purple);
+            text-shadow: 0 0 10px var(--neon-purple);
+            transform: translateX(10px);
+        }
+
+        .contact-container {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .contact-item {
+            background: rgba(10, 10, 15, 0.8);
+            padding: 2.5rem;
+            border: 1px solid #b967ff;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-item:hover {
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 30px #b967ff;
+            transform: translateY(-10px);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px var(--neon-purple));
+        }
+
+        .contact-info {
+            color: #e0e0e0;
+            font-size: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .social-links a {
+            width: 205px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(10, 10, 15, 0.8);
+            border: 2px solid var(--neon-purple);
+            font-size: 2rem;
+            color: var(--neon-purple);
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .social-links a:hover {
+            box-shadow:
+                0 0 20px var(--neon-purple),
+                0 0 40px var(--neon-purple);
+            transform: scale(1.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            background: rgba(10, 10, 15, 0.9);
+            border-top: 1px solid rgba(0, 217, 255, 0.3);
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+        }
+
+       
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.8rem;
+            }
+
+            .neon-name {
+                font-size: 2.5rem;
+                letter-spacing: 3px;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 80px 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="city-bg"></div>
+
+    <nav>
+        <div class="logo">SHIVANSH</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <h1 class="neon-name">SHIVANSH<br>PRATAP SINGH</h1>
+        <p class="hero-subtitle">Aspiring polymath</p>
+        <a href="#contact" class="cta-btn">Initialize Contact</a>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">About</h2>
+        <div class="about-grid">
+            <div class="terminal-box">
+                <p>$ whoami</p>
+                <p>A passionate computer science enthusiast with a strong foundation in mathematics and programming. Driven by curiosity and dedication to learning, I thrive in challenging academic environments and hands-on technical projects.</p>
+                <p>$ cat current_focus.txt</p>
+                <p>Currently advancing through Harvard's CS50x (Week 4), building expertise in C, Python, SQL, and Flask. Actively learning Node.js and C++ to expand backend development capabilities.</p>
+                <p>$ echo "Mission: Contribute to innovative CS projects in algorithmic design and data-driven applications."</p>
+            </div>
+            <div class="stats-box">
+                <div class="stat-card">
+                    <div class="stat-number">1004</div>
+                    <div class="stat-label">CodeForces Rating</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1119</div>
+                    <div class="stat-label">CodeChef Rating</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">₹25980</div>
+                    <div class="stat-label">E-Cell Profit in 1 Week</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">Week 4</div>
+                    <div class="stat-label">CS50x</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-container">
+            <div class="skill-box">
+                <div class="skill-icon">⚡</div>
+                <h3>Programming</h3>
+                <p>C, Python, C++, JavaScript</p>
+            </div>
+            <div class="skill-box">
+                <div class="skill-icon">🌐</div>
+                <h3>Web Dev</h3>
+                <p>HTML/CSS, Node.js, Flask, SQL</p>
+            </div>
+            <div class="skill-box">
+                <div class="skill-icon">🔧</div>
+                <h3>Problem Solving</h3>
+                <p>Algorithms, Data Structures</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header">🎮</div>
+                <div class="project-body">
+                    <h3>Scratch Game</h3>
+                    <p>CS50x Week 1 project utilizing loops and conditionals to explore algorithmic design principles.</p>
+                    <a href="https://scratch.mit.edu/projects/1157943303/fullscreen/" target="_blank" class="project-link">View Demo →</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-header">💰</div>
+                <div class="project-body">
+                    <h3>Zerodha Clone</h3>
+                    <p>Built with HTML & CSS, currently developing backend functionality with financial return calculator feature.</p>
+                    <a href="https://github.com/Shivansh9243/zerodha_lp" target="_blank" class="project-link">GitHub →</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-header">🎓</div>
+                <div class="project-body">
+                    <h3>CS50x Journey</h3>
+                    <p>Currently on Week 4 of Harvard's CS50x, completing projects in C and preparing for Python, SQL, and Flask modules.</p>
+                    <a href="#" class="project-link">In Progress →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-container">
+            <p style="color: #b967ff; margin-bottom: 2rem;">Open to new opportunities, collaborations, and learning experiences.</p>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-info">shivansh.9243@gmail.com</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-info">+91 7651935769</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-info">Bangalore, India</div>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/Shivansh9243" target="_blank" title="GitHub">GitHub</a>
+                <a href="https://www.linkedin.com/in/shivansh-pratap-singh-904a35304/" target="_blank" title="LinkedIn">Linked In</a>
+                <a href="https://x.com/shivansh_9275" target="_blank" title="X">X</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Shivansh Pratap Singh · Crafted with code</p>
+    </footer>
+</body>
+</html>
